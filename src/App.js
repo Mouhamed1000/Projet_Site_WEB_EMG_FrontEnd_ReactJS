@@ -6,6 +6,7 @@ import Menu from './Menu';
 import React from 'react';
 import Marque from './Pages/Marque';
 import Contact from './Pages/Contact';
+import Connexion from './Pages/Connexion';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/marque" element={<Marque />}/>
           <Route path="/identification" element={<Identification />}/>
           <Route path="/contact" element={<Contact />}/>
+          <Route path="/connexion" element={<Connexion />}/>
         </Routes>
     
     </> 
