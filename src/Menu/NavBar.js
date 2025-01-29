@@ -6,7 +6,7 @@ function NavBar () {
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
-        if (location.pathname === "/dashboard" || location.pathname === "/voitures" || location.pathname === "/marques" || location.pathname === "/modeles") {
+        if (location.pathname === "/dashboard" || location.pathname === "/voitures" || location.pathname === "/marques" || location.pathname === "/modeles" || location.pathname === "/accueilDashboard") {
             setIsVisible(false);
         } else {
             setIsVisible(true);

@@ -12,6 +12,7 @@ import Dashboard from './Menu/Dashboard';
 import Voitures from './Operations/Voitures';
 import Marques from './Operations/Marques';
 import Modeles from './Operations/Modeles';
+import AccueilDashboard from './ContentOperations/AccueilDashboard';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/inscription" element={<Insription />}/>
           <Route path='/dashboard' element={<Dashboard />}/>
 
+          <Route path="accueilDashboard" element={<AccueilDashboard />}/>
           <Route path="/voitures" element={<Voitures />} />
           <Route path="/marques" element={<Marques />} />
           <Route path="/modeles" element={<Modeles />} />
