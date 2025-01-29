@@ -8,6 +8,10 @@ import Contact from './Pages/Contact';
 import Connexion from './Login/Connexion';
 import NavBar from './Menu/NavBar';
 import Insription from './Login/Inscription';
+import Dashboard from './Menu/Dashboard';
+import Voitures from './Operations/Voitures';
+import Marques from './Operations/Marques';
+import Modeles from './Operations/Modeles';
 
 function App() {
   return (
@@ -20,7 +24,13 @@ function App() {
           <Route path="/identification" element={<Identification />}/>
           <Route path="/contact" element={<Contact />}/>
           <Route path="/connexion" element={<Connexion />}/>
-          <Route path="/inscription" element={< Insription/>}/>
+          <Route path="/inscription" element={<Insription />}/>
+          <Route path='/dashboard' element={<Dashboard />}/>
+
+          <Route path="/voitures" element={<Voitures />} />
+          <Route path="/marques" element={<Marques />} />
+          <Route path="/modeles" element={<Modeles />} />
+
         </Routes>
     
     </> 

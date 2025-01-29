@@ -1,7 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 function NavBar () {
-    return (
+    const location = useLocation();
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        if (location.pathname === "/dashboard" || location.pathname === "/voitures" || location.pathname === "/marques" || location.pathname === "/modeles") {
+            setIsVisible(false);
+        } else {
+            setIsVisible(true);
+        }
+    }, [location]);
+
+    return isVisible ? (
             <nav>
 
                 <ul class = "flex flex-row text-sky-50 items-center bg-slate-800 h-14">
@@ -41,7 +53,7 @@ function NavBar () {
                 </ul>
 
             </nav>
-     );
+     ) : null;
 }
 
 export default NavBar;

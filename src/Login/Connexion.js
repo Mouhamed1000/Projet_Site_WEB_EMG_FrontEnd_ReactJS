@@ -1,11 +1,15 @@
-import React, { useState } from 'react'; 
+import React, { useEffect, useState } from 'react'; 
+
 
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 function Connexion () {
-
+  
     const [password, setPassword] = useState("");
     const [type, setType] = useState('password');
+    
+    const navigate = useNavigate();
 
     const handleToggle = () => {
         if (type==='password'){
@@ -15,11 +19,30 @@ function Connexion () {
         }
     };
 
+    function buttonClick () {
+       navigate("/dashboard");
+    };
+
+    useEffect(()  => {
+
+      document.body.style.height="100vh";
+      document.body.style.overflow="hidden";
+
+      if (!document.body) 
+        document.body.classList.add('bg-sky-50');
+  
+      return () => {
+        if (!document.body)
+          document.body.classList.remove('bg-sky-50');
+
+      };
+  });
+
     return (
         < >
-                <section class=" w-full h-screen flex justify-center items-center max-w-2xs bg-sky-50">
+                <section class="min-h-screen w-full flex justify-center items-center max-w-2xs">
 
-                    <form class="bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-4">
+                    <form class="bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-14">
 
                         <h2 class="text-center text-2xl mb-6">Connexion</h2>
 
@@ -49,7 +72,7 @@ function Connexion () {
 
                         <div class="flex items-center justify-between">
 
-                          <button class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                          <button class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={buttonClick}>
                             Se connecter
                           </button>
 
