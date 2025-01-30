@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../Menu/Dashboard";
-import AddVoiture from "../DashboardForms/AddVoiture";
 
 function Voitures() {
 
@@ -15,7 +14,6 @@ function Voitures() {
     }
 
     function DeleteVoiture () {
-        navigate("/deleteVoiture");
     }
 
     return (

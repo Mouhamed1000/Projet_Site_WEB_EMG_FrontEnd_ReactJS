@@ -9,19 +9,16 @@ import Connexion from './Login/Connexion';
 import NavBar from './Menu/NavBar';
 import Insription from './Login/Inscription';
 import Dashboard from './Menu/Dashboard';
-import Voitures from './OperationsDashboard/Voitures';
-import Marques from './OperationsDashboard/Marques';
-import Modeles from './OperationsDashboard/Modeles';
+import Voitures from './DashboardPages/Voitures';
+import Marques from './DashboardPages/Marques';
+import Modeles from './DashboardPages/Modeles';
 import AccueilDashboard from './Dashboard/AccueilDashboard';
 import AddMarque from './DashboardForms/AddMarque';
 import EditMarque from './DashboardForms/EditMarque';
-import DeleteMarque from './DashboardForms/DeleteMarque';
 import AddVoiture from './DashboardForms/AddVoiture';
 import EditVoiture from './DashboardForms/EditVoiture';
-import DeleteVoiture from './DashboardForms/DeleteVoiture';
 import AddModele from './DashboardForms/AddModele';
 import EditModele from './DashboardForms/EditModele';
-import DeleteModele from './DashboardForms/DeleteModele';
 
 function App() {
   return (
@@ -44,15 +41,12 @@ function App() {
 
           <Route path="/addVoiture" element={<AddVoiture />}/>
           <Route path="/editVoiture" element={<EditVoiture />} />
-          <Route path="/deleteVoiture" element={<DeleteVoiture/>}/>
           
           <Route path="/addMarque" element={<AddMarque />}/>
           <Route path="/editMarque" element={<EditMarque />} />
-          <Route path="/deleteMarque" element={<DeleteMarque/>}/>
 
           <Route path="/addModele" element={<AddModele />}/>
           <Route path="/editModele" element={<EditModele />} />
-          <Route path="/deleteModele" element={<DeleteModele/>}/>
 
         </Routes>
     

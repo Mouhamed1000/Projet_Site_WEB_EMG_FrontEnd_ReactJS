@@ -1,6 +1,14 @@
+import { useEffect } from "react";
 import Dashboard from "../Menu/Dashboard";
 
 function AccueilDashboard () {
+
+    useEffect(()  => {
+    
+          document.body.style.width="100vw";
+          document.body.style.height="100vh";
+    });
+
     return (
         <>
             <Dashboard />
