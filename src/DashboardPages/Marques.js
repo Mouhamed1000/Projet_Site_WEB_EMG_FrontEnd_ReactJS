@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../Menu/Dashboard";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Marques() {
 
@@ -13,8 +15,49 @@ function Marques() {
         navigate("/editMarque");
     }
 
-    function DeleteMarque () {
-    }
+    // Fonction de suppression d'une marque
+    const DeleteMarque = async (id) => {
+
+      try {
+
+        const response = await axios.delete(`http://localhost:5000/api/Marque/${id}`);
+        
+        if (response.status === 204) {
+          // Si La suppression a réussi, on met à jour la liste des marques
+          setMarques((prevMarques) => prevMarques.filter((marque) => marque.id !== id));
+
+        } else {
+          alert("La suppression a échoué");
+        }
+
+      } catch (error) {
+
+        console.error("Erreur lors de la suppression de la marque", error);
+        alert("Une erreur est survenue lors de la suppression de la marque");
+        
+      }
+
+    };
+
+    //Définition d'état pour les marques
+    const [marques, setMarques] = useState([]);
+
+    //Récupération des marques au chargement
+    useEffect(() => {
+        const getMarques = async () => {
+
+            try {
+
+                const response = await axios.get("http://localhost:5000/api/Marque");
+                //On met à jour l'état avec les données récupérées
+                setMarques(response.data);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des marques:", error);
+            }
+        };
+
+        getMarques();
+    }, []);
 
     return (
         <>
@@ -38,19 +81,26 @@ function Marques() {
                         </tr>  
                     </thead>  
                     
-                    <tbody>    
-                        <tr> 
-                            <td>2</td>   
-                            <td>2</td>   
-                            <td>2</td>
-                            <td>
-                                <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={EditMarque}>Modifier</button>
-                            </td>
-                            <td>
-                                <button class="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={DeleteMarque}>Supprimer</button>
-                            </td>
-                            
-                        </tr>   
+                    <tbody>
+                        {marques.length > 0 ? (
+                            marques.map((marque) => (
+                                <tr key={marque.id}>
+                                    <td>{marque.id}</td>
+                                    <td>{marque.nom}</td>
+                                    <td>{marque.modeles ? marque.modeles.length : 0}</td>   
+                                    <td>
+                                        <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditMarque(marque.id)}>Modifier</button>
+                                    </td>
+                                    <td>
+                                        <button class="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteMarque(marque.id)}>Supprimer</button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan={5}>Aucune marque disponible</td>
+                            </tr>
+                        )}     
 
                     </tbody>
                 </table>

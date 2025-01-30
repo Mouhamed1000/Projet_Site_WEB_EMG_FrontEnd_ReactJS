@@ -19,6 +19,7 @@ import AddVoiture from './DashboardForms/AddVoiture';
 import EditVoiture from './DashboardForms/EditVoiture';
 import AddModele from './DashboardForms/AddModele';
 import EditModele from './DashboardForms/EditModele';
+import VoitureDetails from './MainPages/DetailsVoiture';
 
 function App() {
   return (
@@ -47,6 +48,8 @@ function App() {
 
           <Route path="/addModele" element={<AddModele />}/>
           <Route path="/editModele" element={<EditModele />} />
+
+          <Route path="/voitures/details/:id" element={<VoitureDetails />} />
 
         </Routes>
     
