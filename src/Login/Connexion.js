@@ -20,7 +20,7 @@ function Connexion () {
     };
 
     function buttonClick () {
-       navigate("/dashboard");
+       navigate("/accueilDashboard");
     };
 
     useEffect(()  => {
@@ -80,7 +80,7 @@ function Connexion () {
 
                         <div class="mt-4 mb-4"> 
 
-                            <a class="inline-block align-baseline font-bold text-sm text-slate-700 hover:text-slate-900" href="Inscription">
+                            <a class="inline-block align-baseline font-bold text-sm text-slate-700 hover:text-slate-900" href="/Inscription">
                                 Vous n'avez pas encore de compte EmgMed1000 ? Insctiption
                             </a>
 
