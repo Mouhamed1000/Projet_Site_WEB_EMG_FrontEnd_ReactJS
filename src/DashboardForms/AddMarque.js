@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dashboard from "../Menu/Dashboard";
 import axios from "axios";
 
@@ -20,6 +20,14 @@ function AddMarque() {
       setNouveauModele("");
     }
   };
+
+  //Disparition automatique des messages
+  useEffect(() => {
+   if (message.text) {
+       const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+       return () => clearTimeout(timer);
+     }
+   }, [message]);
 
   //Soumission du formulaire
   const handleSubmit = async (e) => {
@@ -46,14 +54,6 @@ function AddMarque() {
       setMessage({ type: "error", text: "Erreur lors de l'ajout de la marque." });
     }
   };
-
-   //Disparition automatique des messages
-   useEffect(() => {
-    if (message.text) {
-        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
-        return () => clearTimeout(timer);
-      }
-    }, [message]);
 
     return (
         <>

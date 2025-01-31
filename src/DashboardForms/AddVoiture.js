@@ -85,7 +85,7 @@ function AddVoiture() {
     setMessage(null);
 
     //Verification des champs
-    if (!photo || !statutVoiture || !description || !anneeVoiture || !marqueId) {
+    if (!formData.photo || !formData.statutVoiture || !formData.description || !formData.anneeVoiture || !formData.marqueId) {
       setMessage({ type: "success", text: "Tous les champs sont obligatoires !" });
       return;
     }
@@ -102,7 +102,7 @@ function AddVoiture() {
 
       //Ensuite, on envoie ses données par méthode post à notre back-end en utilisant axios(...)
       const response = await axios.post("http://localhost:5000/api/Voiture/upload-and-create", data, {
-        headers : { "Content-Type" : "multipart/form-Data" }
+        headers : { "Content-Type" : "multipart/form-data" }
       });
 
       setMessage({ type: "success", text: "Voiture ajoutée avec succès !" });
@@ -152,7 +152,7 @@ function AddVoiture() {
 
                     <div className="mb-4">
                       <label htmlFor="photo" className="block text-sm font-medium text-gray-700">Photo de la Voiture</label>
-                      <input type="file" id="photo" onChange={handleFileChange} className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg"/>
+                      <input type="file" id="photo" value={formData.photo} onChange={handleFileChange} className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg"/>
                     </div>
 
                     <div className="mb-4">

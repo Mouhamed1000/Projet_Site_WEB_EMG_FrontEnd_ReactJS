@@ -28,6 +28,10 @@ function NavBar () {
                     <div class="flex justify-end w-full">
 
                         <li class="ml-16"> 
+                            <NavLink to="/" class="font-medium text-lg px-3 py-2 text-sky-50 hover:bg-slate-100 hover:text-slate-900">Accueil</NavLink> 
+                        </li>
+
+                        <li class="ml-16"> 
                             <NavLink to="/marque" class="font-medium text-lg px-3 py-2 text-sky-50 hover:bg-slate-100 hover:text-slate-900">Marque</NavLink> 
                         </li>
 

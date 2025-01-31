@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../Menu/Dashboard";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Modeles() {
 
@@ -15,8 +15,11 @@ function Modeles() {
         navigate("/editModele");
     }
 
+    //Définition de l'état pour les marques
+    const [marques, setMarques] = useState([]);
+
     // Fonction de suppression d'une marque
-    const DeleteMarque = async (id) => {
+    const DeleteModele = async (id) => {
 
       try {
         const response = await axios.delete(`http://localhost:5000/api/Marque/${id}`);
@@ -50,15 +53,14 @@ function Modeles() {
         } catch (error) {
             console.error("Erreur lors de la récupération des modèles", error);
         }
-
-        //On récupère le modèle lors la page est prête
-        useEffect(() => {
-
-            getModeles();
-
-        }, []);
-
     }
+
+    //On récupère le modèle lors la page est prête
+    useEffect(() => {
+
+      getModeles();
+
+  }, []);
 
     return (
         <>
@@ -85,26 +87,30 @@ function Modeles() {
                     
                     <tbody>     
 
-                        {modeles.map((modele) => (
+                    {modeles && modeles.length > 0 ? (
 
-                          <tr key={modele.id}>
+                      modeles.map((modele) => (
 
-                            <td>{modele.id}</td>
-                            <td>{modele.nom}</td>
-                            <td>{modele.annee}</td>
-                            <td>{modele.marqueNom}</td>
-
-                            <td>
-                              <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditModele(modele.id)}>Modifier</button>
-                            </td>
-
-                            <td>
-                              <button class="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteModele(modele.id)}>Supprimer</button>
-                            </td>
-
-                          </tr>
-
-                        ))}
+                        <tr key={modele.id}>
+                          <td>{modele.id}</td>
+                          <td>{modele.nom}</td>
+                          <td>{modele.annee}</td>
+                          <td>{modele.marqueNom}</td>
+                      
+                          <td>
+                            <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600"onClick={() => EditModele(modele.id)}>Modifier</button>
+                          </td>
+                      
+                          <td>
+                            <button className="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteModele(modele.id)}>Supprimer</button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="6">Aucun modèle disponible</td>
+                      </tr>
+                    )}
 
                     </tbody>
                 </table>

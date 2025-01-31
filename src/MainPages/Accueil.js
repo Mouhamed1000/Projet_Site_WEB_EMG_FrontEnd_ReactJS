@@ -1,10 +1,13 @@
-import { useHistory} from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import {useNavigate} from "react-router-dom";
+import VoitureDetails from "./DetailsVoiture";
 
 function Accueil () {
 
       //Définition des états
       const [voitures, setVoitures] = useState([]);
-      const history = useHistory();
+      const history = useNavigate();
           
       // Fonction pour récupérer les voitures
       const getVoitures = async () => {
@@ -37,13 +40,13 @@ function Accueil () {
 
                   <div key={voiture.id} className="flex flex-col items-center bg-sky-100 p-4 rounded-md shadow-md">
                   
-                    <img src={voiture.photo} alt={voiture.modele} className="w-40 h-40 object-cover mb-4 cursor-pointer" onClick={() => goToVoitureDetails(voiture.id)} />
+                    <img src={voiture.photo} alt={voiture.modele} className="w-40 h-40 object-cover mb-4 cursor-pointer" onClick={() => VoitureDetails(voiture.id)} />
                   
                     <h3 className="text-lg font-semibold">{voiture.modele}</h3>
                  
                     <p className="text-sm">{voiture.marque}</p>
 
-                    <button className="bg-blue-500 text-white p-2 rounded-md mt-4 hover:bg-blue-600" onClick={() => goToVoitureDetails(voiture.id)} > Voir Détails </button>
+                    <button className="bg-blue-500 text-white p-2 rounded-md mt-4 hover:bg-blue-600" onClick={() => VoitureDetails(voiture.id)} > Voir Détails </button>
                
                   </div>
               ))

@@ -1,13 +1,14 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'; 
 
 
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 function Connexion () {
   
     //Definition des etats pour le username et password
-    const [username, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState("");
     const [type, setType] = useState('password');
 
@@ -16,9 +17,12 @@ function Connexion () {
     // Récupérer le profil admin ou personnel
     const profil = searchParams.get("profil"); 
 
+    //Définition d'état pour message flash
+    const [message, setMessage] = useState({ type: "", text: "" });
+
     //Definition des etats pour token, et erreur
     const [token, setToken] = useState(null);
-    const [error, setError] = useState('');
+    const [error, setError] = useState({ type: '', text: "" });
     
     const navigate = useNavigate();
 
@@ -31,7 +35,7 @@ function Connexion () {
     };
 
     function buttonClick () {
-       navigate("/accueilDashboard");
+      //  navigate("/accueilDashboard");
     };
 
     useEffect(()  => {
@@ -49,15 +53,38 @@ function Connexion () {
       };
   });
 
+    //Disparition automatique des messages
+    useEffect(() => {
+      if (message.text) {
+          const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+          return () => clearTimeout(timer);
+        }
+    }, [message]);
+
+    useEffect(() => {
+      if (error.text) {
+        const timer = setTimeout(() => {
+          setError({ type: "", text: "" })
+        }, 5000);
+  
+        return () => clearTimeout(timer); 
+      }
+    }, [error]);
+
     const handleLogin = async (e) => 
     {
       e.preventDefault();
+
+      if (!email.trim() ||  !password.trim() || !profil.trim()) {
+        setMessage({ type: "error", text: "Tous les champs sont requis." });
+        return;
+      }
 
         try {
         
               const response = await axios.post('http://localhost:5000/api/auth/login', 
               {
-                username,
+                email,
                 password,
                 profil
               },
@@ -74,7 +101,7 @@ function Connexion () {
               console.log("Connexion réussie ! Token :", response.data.token);
             
             } catch (err) {
-              setError('Invalid credentials');
+              setError("Informations incorrectes !");
             }
           
     };
@@ -86,6 +113,18 @@ function Connexion () {
                     <form onSubmit={handleLogin} class="bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-14">
 
                         <h2 class="text-center text-2xl mb-6">Connexion {profil}</h2>
+
+                        {message.text && (
+                          <div className={`p-3 mb-4 rounded ${message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+                              {message.text}
+                          </div>
+                        )}
+
+                        {error.text && (
+                          <div class="p-3 mb-4 rounded bg-red-500 text-center ">
+                            {error.text}
+                          </div>
+                        )}
 
                         <div class="mb-8">
 
@@ -109,15 +148,13 @@ function Connexion () {
                             {type === 'password' ? <FaEyeSlash size={25} /> : <FaEye size={25} />}
                           </span>
 
-                          {error && <div>{error}</div>}
-
                           {token && <div>Connexion réussie Token: {token}</div>}
                                              
                         </div>
 
                         <div class="flex items-center justify-between">
 
-                          <button class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={buttonClick}>
+                          <button class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={handleLogin}>
                             Se connecter
                           </button>
 
@@ -125,7 +162,7 @@ function Connexion () {
 
                         <div class="mt-4 mb-4"> 
 
-                            <a class="inline-block align-baseline font-bold text-sm text-slate-700 hover:text-slate-900" href="/Inscription">
+                            <a class="inline-block align-baseline font-bold text-sm text-slate-700 hover:text-slate-900" href={`/Inscription?profil=${profil}`} >
                                 Vous n'avez pas encore de compte EmgMed1000 ? Insctiption
                             </a>
 
@@ -133,8 +170,7 @@ function Connexion () {
 
                       </form>
 
-                </section>
-
+                </section>               
         </>
     );
 }

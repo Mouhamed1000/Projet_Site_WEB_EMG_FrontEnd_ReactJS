@@ -1,11 +1,29 @@
-import React, { useState } from 'react'; 
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'; 
 
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useSearchParams } from 'react-router-dom';
 
 function Inscription ()
 {
+  //Définition des états pour les champs de notre formulaire
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
   const [type, setType] = useState('password');
+
+  const [searchParams] = useSearchParams();
+  // Récupérer le profil admin ou personnel
+  const _profil = searchParams.get("profil"); 
+
+  //Definition des etats pour token
+  const [token, setToken] = useState(null);
+
+  //Définition d'état pour message flash
+  const [message, setMessage] = useState({ type: "", text: "" });
 
   const handleToggle = () => {
       if (type==='password'){
@@ -15,14 +33,63 @@ function Inscription ()
       }
    };
 
+    //Disparition automatique des messages
+    useEffect(() => {
+     if (message.text) {
+         const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+         return () => clearTimeout(timer);
+       }
+    }, [message]);
+
+    const handleRegister = async (e) => {
+      e.preventDefault();
+
+      if (!firstName.trim() || !lastName.trim() || !email.trim() || !password().trim()) {
+        setMessage({ type: "error", text: "Tous les champs sont requis." });
+        return;
+      }
+
+      try {
+              const response = await axios.post('http://localhost:5000/api/auth/register', {
+              _firstName: firstName,
+              _lastName: lastName,
+              _email: email,
+              _password: password,
+              _profil: _profil
+          }, 
+          {
+            Headers : { "Content-Type": "application/json" }, 
+          }
+          );
+
+          setToken(response.data.token);
+          //On sauvegarde le token dans le localStorage
+          localStorage.setItem('jwtToken', response.data.token);  
+
+          console.log("Connexion réussie ! Token :", response.data.token);
+
+          console.log(response.data);
+
+        } catch (error) {
+            console.error('Erreur lors de l\'inscription :', error.response.data.message);
+        }
+
+    };
+
     return (
         <>
 
                 <section class="flex justify-center items-center w-full max-w-2xs mt-6">
 
-                    <form class="w-full max-w-lg">
+                    <form  onSubmit={handleRegister} class="w-full max-w-lg">
 
-                        <h2 class="text-center text-2xl mb-6">Inscription</h2>
+                        <h2 class="text-center text-2xl mb-6">Inscription {_profil}</h2>
+
+                        {message.text && (
+                          <div className={`p-3 mb-4 rounded ${message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+                                {message.text}
+                          </div>
+                        )}
 
                         <div class="flex flex-wrap -mx-3 mb-6">
 
@@ -31,7 +98,7 @@ function Inscription ()
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-prenom">
                               Prenom
                             </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-prenom" type="text" placeholder="prenom" />
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" value={firstName} onChange={(e) => setFirstName(e.target.value)} id="grid-prenom" type="text" placeholder="prenom" />
 
                           </div>
 
@@ -41,7 +108,16 @@ function Inscription ()
                               Nom
                             </label>
 
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-nom" type="text" placeholder="nom" />
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" value={lastName} onChange={(e) => setLastName(e.target.value)} id="grid-nom" type="text" placeholder="nom" />
+                          </div>
+
+                          <div class="w-full px-3">
+
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
+                              Email
+                            </label>
+
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" value={email} onChange={(e) => setEmail(e.target.value)} id="grid-email" type="email" placeholder="Email" />
                           </div>
 
                         </div>
@@ -74,7 +150,7 @@ function Inscription ()
 
                         <div class="mt-4 mb-4 text-center"> 
 
-                            <a class="inline-block align-baseline font-bold text-sm text-slate-700 hover:text-slate-900" href="/connexion">
+                            <a class="inline-block align-baseline font-bold text-sm text-slate-700 hover:text-slate-900" href={`/connexion?profil=${_profil}`}>
                                 Vous avez déjà un compte EmgMed1000 ? Connexion
                             </a>
 
