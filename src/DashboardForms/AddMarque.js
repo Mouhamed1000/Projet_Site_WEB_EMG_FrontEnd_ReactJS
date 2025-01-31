@@ -22,6 +22,7 @@ function AddMarque() {
   };
 
   //Disparition automatique des messages
+  //Le port choisi est 32000 pour le backend
   useEffect(() => {
    if (message.text) {
        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
