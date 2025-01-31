@@ -25,7 +25,7 @@ function EditMarque({ marqueId }) {
 
         try {
 
-            const response = await axios.get(`http://localhost:5000/api/Marque/${marqueId}`, {
+            const response = await axios.get(`http://localhost:32000/api/Marque/${marqueId}`, {
 
             headers: {
               "Authorization": `Bearer ${token}`,
@@ -57,7 +57,7 @@ function EditMarque({ marqueId }) {
       useEffect(() => {
 
         if (message.text) {
-            const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+            const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
             return () => clearTimeout(timer);
           }
 
@@ -77,7 +77,7 @@ function EditMarque({ marqueId }) {
   
       try {
 
-        const response = await axios.put(`http://localhost:5000/api/Marque/${marqueId}`, marque, {
+        const response = await axios.put(`http://localhost:32000/api/Marque/${marqueId}`, marque, {
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`,

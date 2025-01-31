@@ -56,7 +56,7 @@ function Connexion () {
     //Disparition automatique des messages
     useEffect(() => {
       if (message.text) {
-          const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+          const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
           return () => clearTimeout(timer);
         }
     }, [message]);
@@ -65,7 +65,7 @@ function Connexion () {
       if (error.text) {
         const timer = setTimeout(() => {
           setError({ type: "", text: "" })
-        }, 5000);
+        }, 32000);
   
         return () => clearTimeout(timer); 
       }
@@ -82,7 +82,7 @@ function Connexion () {
 
         try {
         
-              const response = await axios.post('http://localhost:5000/api/auth/login', 
+              const response = await axios.post('http://localhost:32000/api/auth/login', 
               {
                 email,
                 password,

@@ -20,7 +20,7 @@ function VoitureDetails () {
 
              //On récupère les détails de la voiture en utilisant Axios
 
-              const response = await axios.get(`http://localhost:5000/api/Voiture/${id}`);
+              const response = await axios.get(`http://localhost:32000/api/Voiture/${id}`);
               setVoiture(response.data);
 
             

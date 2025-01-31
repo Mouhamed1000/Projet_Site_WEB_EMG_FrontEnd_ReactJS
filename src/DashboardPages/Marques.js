@@ -20,7 +20,7 @@ function Marques() {
 
       try {
 
-        const response = await axios.delete(`http://localhost:5000/api/Marque/${id}`);
+        const response = await axios.delete(`http://localhost:32000/api/Marque/${id}`);
         
         if (response.status === 204) {
           // Si La suppression a réussi, on met à jour la liste des marques
@@ -48,7 +48,7 @@ function Marques() {
 
             try {
 
-                const response = await axios.get("http://localhost:5000/api/Marque");
+                const response = await axios.get("http://localhost:32000/api/Marque");
                 //On met à jour l'état avec les données récupérées
                 setMarques(response.data);
             } catch (error) {

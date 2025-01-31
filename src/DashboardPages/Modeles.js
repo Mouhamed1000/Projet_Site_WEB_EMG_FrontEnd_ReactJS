@@ -22,7 +22,7 @@ function Modeles() {
     const DeleteModele = async (id) => {
 
       try {
-        const response = await axios.delete(`http://localhost:5000/api/Marque/${id}`);
+        const response = await axios.delete(`http://localhost:32000/api/Marque/${id}`);
 
         if (response.status === 204) {
 
@@ -47,7 +47,7 @@ function Modeles() {
     //Fonction pour récupérer tous les modèles en utilisant l'Api Axios
     const getModeles = async () => {
         try {
-            const response = axios.get("http://localhost:5000/api/Modele/GetAllModelesFromTable");
+            const response = axios.get("http://localhost:32000/api/Modele/GetAllModelesFromTable");
             //On met à jour l'état avec les modèles récupérées
             setModeles(response.data);
         } catch (error) {

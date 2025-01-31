@@ -14,7 +14,7 @@ function Accueil () {
 
       try {
 
-            const response = await axios.get('http://localhost:5000/api/Voiture/GetAllVoitures');
+            const response = await axios.get('http://localhost:32000/api/Voiture/GetAllVoitures');
             //On met à jour l'état avec les voitures récupérées
             setVoitures(response.data);  
              

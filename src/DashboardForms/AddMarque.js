@@ -24,7 +24,7 @@ function AddMarque() {
   //Disparition automatique des messages
   useEffect(() => {
    if (message.text) {
-       const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+       const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
        return () => clearTimeout(timer);
      }
    }, [message]);
@@ -40,7 +40,7 @@ function AddMarque() {
 
     try {
       //Appel au back-end en utilisant Axios
-      const response = await axios.post("http://localhost:5000/api/Marque", {
+      const response = await axios.post("http://localhost:32000/api/Marque", {
         nomMarque : nomMarque,
         ListModele: modeles.map(nom => ({ nomModele: nom }))
       });

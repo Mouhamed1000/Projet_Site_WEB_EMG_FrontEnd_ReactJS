@@ -18,7 +18,7 @@ function AddModele() {
   //Disparition du message apres 5 secondes
   useEffect(() => {
     if (message.text) {
-        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
         return () => clearTimeout(timer);
     }
   }, [message]);
@@ -26,7 +26,7 @@ function AddModele() {
   //On changement les marques depuis notre back-end en utilisant l'Api Axios
   useEffect(() => {
 
-    axios.get("http://localhost:5000/api/Marque")
+    axios.get("http://localhost:32000/api/Marque")
         .then(response => setMarques(response.data))
         .catch(error => console.error("Erreur lors de la récupération des marques :", error));  
   }, []);
@@ -52,7 +52,7 @@ function AddModele() {
 
     try {
 
-      const response = await axios.post("http://localhost:5000/api/Modele", newModele, {
+      const response = await axios.post("http://localhost:32000/api/Modele", newModele, {
         headers: { "Content-Type": "application/json" }
       });
 

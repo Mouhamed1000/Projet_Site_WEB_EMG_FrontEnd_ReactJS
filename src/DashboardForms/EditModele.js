@@ -18,7 +18,7 @@ function EditModele({ modeleId }) {
 
   // Charger les données du modèle au chargement du composant
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/Modele/${modeleId}`)
+    axios.get(`http://localhost:32000/api/Modele/${modeleId}`)
       .then(response => {
         setModele(response.data);
       })
@@ -26,7 +26,7 @@ function EditModele({ modeleId }) {
         console.error('Erreur lors du chargement du modèle:', error);
       });
 
-    axios.get('http://localhost:5000/api/Modele')
+    axios.get('http://localhost:32000/api/Modele')
       .then(response => {
         setMarques(response.data);
       })
@@ -39,7 +39,7 @@ function EditModele({ modeleId }) {
     useEffect(() => {
 
     if (message.text) {
-        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
         return () => clearTimeout(timer);
       }
 

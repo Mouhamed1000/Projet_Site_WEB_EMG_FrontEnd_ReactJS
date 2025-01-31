@@ -26,7 +26,7 @@ function EditVoiture({ voitureId }) {
   // Récupérer la liste des marques
   useEffect(() => {
 
-    axios.get('http://localhost:5000/api/Marque') 
+    axios.get('http://localhost:32000/api/Marque') 
       .then(response => {
         setMarques(response.data);
       })
@@ -39,7 +39,7 @@ function EditVoiture({ voitureId }) {
   // Récupérer les données de la voiture pour pré-remplir le formulaire
   useEffect(() => {
 
-    axios.get(`http://localhost:5000/api/Voiture/${voitureId}`)
+    axios.get(`http://localhost:32000/api/Voiture/${voitureId}`)
       .then(response => {
 
         setVoiture(response.data);
@@ -72,7 +72,7 @@ function EditVoiture({ voitureId }) {
     // Récupérer les modèles pour la marque sélectionnée
     if (selectedMarqueId) {
 
-      axios.get(`http://localhost:5000/api/Modele/modeles/${selectedMarqueId}`)
+      axios.get(`http://localhost:32000/api/Modele/modeles/${selectedMarqueId}`)
         .then(response => {
           setModeles(response.data); // Mettre à jour la liste des modèles
         })
@@ -87,7 +87,7 @@ function EditVoiture({ voitureId }) {
   useEffect(() => {
 
     if (message.text) {
-        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
         return () => clearTimeout(timer);
       }
 
@@ -118,7 +118,7 @@ function EditVoiture({ voitureId }) {
       return;
     }
 
-    axios.put(`http://localhost:5000/api/Voiture/${voitureId}`, formData)
+    axios.put(`http://localhost:32000/api/Voiture/${voitureId}`, formData)
       .then(response => {
 
         console.log("Voiture mise à jour avec succès");

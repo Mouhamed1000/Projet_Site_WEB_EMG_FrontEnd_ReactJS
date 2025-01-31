@@ -36,7 +36,7 @@ function Inscription ()
     //Disparition automatique des messages
     useEffect(() => {
      if (message.text) {
-         const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
+         const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
          return () => clearTimeout(timer);
        }
     }, [message]);
@@ -50,7 +50,7 @@ function Inscription ()
       }
 
       try {
-              const response = await axios.post('http://localhost:5000/api/auth/register', {
+              const response = await axios.post('http://localhost:32000/api/auth/register', {
               _firstName: firstName,
               _lastName: lastName,
               _email: email,

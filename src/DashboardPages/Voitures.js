@@ -20,7 +20,7 @@ function Voitures() {
 
       try {
 
-        const response = await axios.delete(`http://localhost:5000/api/Voiture/${id}`);
+        const response = await axios.delete(`http://localhost:32000/api/Voiture/${id}`);
 
         if (response.status === 204) {
           //Si la suppression a réussi, on met à jour la liste des voitures
@@ -47,7 +47,7 @@ function Voitures() {
 
       try {
 
-        const response = await axios.get("http://localhost:5000/api/Voiture/GetAllVoitures");
+        const response = await axios.get("http://localhost:32000/api/Voiture/GetAllVoitures");
         //On met à jour l'état avec les voitures récupérées
         setVoitures(response.data); 
       
