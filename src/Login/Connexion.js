@@ -6,8 +6,19 @@ import { useNavigate } from 'react-router-dom';
 
 function Connexion () {
   
+    //Definition des etats pour le username et password
+    const [username, setEmail] = useState('');
     const [password, setPassword] = useState("");
     const [type, setType] = useState('password');
+
+    //On récupére les paramètres de l'URL
+    const [searchParams] = useSearchParams();
+    // Récupérer le profil admin ou personnel
+    const profil = searchParams.get("profil"); 
+
+    //Definition des etats pour token, et erreur
+    const [token, setToken] = useState(null);
+    const [error, setError] = useState('');
     
     const navigate = useNavigate();
 
@@ -38,13 +49,43 @@ function Connexion () {
       };
   });
 
+    const handleLogin = async (e) => 
+    {
+      e.preventDefault();
+
+        try {
+        
+              const response = await axios.post('http://localhost:5000/api/auth/login', 
+              {
+                username,
+                password,
+                profil
+              },
+              {
+                headers: { "Content-Type": "application/json" }, 
+              }
+              );
+            
+              setToken(response.data.token);
+              //On sauvegarde le token dans le localStorage
+              localStorage.setItem('jwtToken', response.data.token);  
+              setError('');
+
+              console.log("Connexion réussie ! Token :", response.data.token);
+            
+            } catch (err) {
+              setError('Invalid credentials');
+            }
+          
+    };
+
     return (
         < >
                 <section class="min-h-screen w-full flex justify-center items-center max-w-2xs">
 
-                    <form class="bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-14">
+                    <form onSubmit={handleLogin} class="bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-14">
 
-                        <h2 class="text-center text-2xl mb-6">Connexion</h2>
+                        <h2 class="text-center text-2xl mb-6">Connexion {profil}</h2>
 
                         <div class="mb-8">
 
@@ -52,7 +93,7 @@ function Connexion () {
                             Email
                           </label>
 
-                          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email" />
+                          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email" />
                         
                         </div>
 
@@ -67,6 +108,10 @@ function Connexion () {
                           <span className="absolute right-5 top-12 transform -translate-y-1/2 cursor-pointer"  aria-label={type === 'password' ? 'Afficher le mot de passe' : 'Masquer le mot de passe'} onClick={handleToggle}>
                             {type === 'password' ? <FaEyeSlash size={25} /> : <FaEye size={25} />}
                           </span>
+
+                          {error && <div>{error}</div>}
+
+                          {token && <div>Connexion réussie Token: {token}</div>}
                                              
                         </div>
 
