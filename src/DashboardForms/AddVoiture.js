@@ -84,6 +84,11 @@ function AddVoiture() {
     setLoading(true);
     setMessage(null);
 
+    if (formData.anneeVoiture < 2010) {
+      setMessage({ type: "error", text: "L'année de la voiture doit être supérieure à 2010." });
+      return;
+    }
+
     //Verification des champs
     if (!formData.photo || !formData.statutVoiture || !formData.description || !formData.anneeVoiture || !formData.marqueId) {
       setMessage({ type: "success", text: "Tous les champs sont obligatoires !" });

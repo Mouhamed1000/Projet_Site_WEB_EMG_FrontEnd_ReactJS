@@ -4,6 +4,7 @@ import { IoCarSportSharp } from "react-icons/io5";
 import { TbBrandAuth0 } from "react-icons/tb";
 import { GoVersions } from "react-icons/go";
 import { FaSignOutAlt } from "react-icons/fa";
+import axios from "axios";
 
 function Dashboard () {
 
@@ -12,6 +13,24 @@ function Dashboard () {
     const handleClick = (path) => {
         navigate(path);
     }
+
+    const logout = () => {
+        //On supprime le token
+        localStorage.removeItem("token");
+        navigate("/accueil");
+    };
+
+    //En cas d'erreur 404
+    axios.interceptors.response.use(
+        response => response,
+        error => {
+            if (error.response && error.response.status === 401) {
+                 // Déconnecte l'utilisateur si le token est invalide
+                logout();
+            }
+            return Promise.reject(error);
+        }
+    );
 
     return (
         <>      
@@ -44,7 +63,7 @@ function Dashboard () {
 
                             <li class="hover:bg-blue-500 w-full text-center h-14 flex ml-8 items-center text-2xl hover:rounded-md p-6 cursor-pointer"> 
                                 <FaSignOutAlt class="mr-1"/>
-                                <NavLink to="#"class="font-medium px-3 py-2 text-sky-50 hover:text-slate-900"> Deconnexion </NavLink> 
+                                <span class="font-medium px-3 py-2 text-sky-50 hover:text-slate-900" onClick={logout}> Deconnexion </span> 
                             </li>
 
                     </ul>

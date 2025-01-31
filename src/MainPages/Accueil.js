@@ -28,7 +28,7 @@ function Accueil () {
     return (
         <>
           
-          <section className="ml-64 flex flex-col justify-center items-center overflow-hidden p-4 shadow-2xl tracking-wide">
+          <section className="flex flex-col justify-center w-screen items-center overflow-hidden p-4 tracking-wide">
           
             <h1 className="text-center mt-2 text-2xl mb-4">Voitures disponibles </h1>
 
@@ -52,7 +52,7 @@ function Accueil () {
               ))
               ) : (
 
-                  <p>Aucune voiture disponible</p>
+                  <p class="text-xl mt-20 text-center w-screen tracking-wider">Aucune voiture disponible !</p>
 
               )}
 
