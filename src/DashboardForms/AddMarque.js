@@ -25,7 +25,7 @@ function AddMarque() {
   //Le port choisi est 32000 pour le backend
   useEffect(() => {
    if (message.text) {
-       const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
+       const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
        return () => clearTimeout(timer);
      }
    }, [message]);
@@ -42,8 +42,11 @@ function AddMarque() {
     try {
       //Appel au back-end en utilisant Axios
       const response = await axios.post("http://localhost:32000/api/Marque", {
-        nomMarque : nomMarque,
-        ListModele: modeles.map(nom => ({ nomModele: nom }))
+        NomMarq : nomMarque,
+        ListModele : modeles.map(nom => ({ nomModele: nom }))
+      },
+      {
+        headers : { "Content-Type": "application/json",}
       });
 
       setMessage({ type: "success", text: "Marque et modèles créés avec succès !" });
@@ -73,13 +76,13 @@ function AddMarque() {
                     )}
 
                     <div className="mb-8">
-                      <label htmlFor="nomMarque" value={nomMarque} onChange={(e) => setNomMarque(e.target.value)} className="block text-lg font-medium text-gray-700">Nom de la Marque</label>
-                      <input type="text" id="nomMarque" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg" placeholder="Entrez le nom de la marque" />
+                      <label htmlFor="nomMarque" className="block text-lg font-medium text-gray-700">Nom de la Marque</label>
+                      <input type="text" value={nomMarque} onChange={(e) => setNomMarque(e.target.value)} id="nomMarque" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg" placeholder="Entrez le nom de la marque" />
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="nouveauModele" value={nouveauModele} onChange={(e) => setNouveauModele(e.target.value)} className="block text-lg font-medium text-gray-700">Ajouter un modele</label>
-                      <input type="text" id="nouveauModele" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg" placeholder="Entrez un modèle" />
+                      <label htmlFor="nouveauModele" className="block text-lg font-medium text-gray-700">Ajouter un modele</label>
+                      <input type="text" id="nouveauModele" value={nouveauModele} onChange={(e) => setNouveauModele(e.target.value)}  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg" placeholder="Entrez un modèle" />
                       
                       <button type="button" onClick={ajouterModele} className="mt-6 inline-block px-4 py-2 bg-blue-600 text-white font-medium text-base rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         Ajouter le modele

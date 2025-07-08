@@ -56,7 +56,7 @@ function Connexion () {
     //Disparition automatique des messages
     useEffect(() => {
       if (message.text) {
-          const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
+          const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
           return () => clearTimeout(timer);
         }
     }, [message]);
@@ -65,7 +65,7 @@ function Connexion () {
       if (error.text) {
         const timer = setTimeout(() => {
           setError({ type: "", text: "" })
-        }, 32000);
+        }, 2000);
   
         return () => clearTimeout(timer); 
       }
@@ -82,11 +82,11 @@ function Connexion () {
 
         try {
         
-              const response = await axios.post('http://localhost:32000/api/auth/login', 
+              const response = await axios.post('http://localhost:32000/api/authentication/login', 
               {
-                email,
-                password,
-                profil
+                _email : email,
+                _password : password,
+                _profil : profil
               },
               {
                 headers: { "Content-Type": "application/json" }, 
@@ -99,9 +99,15 @@ function Connexion () {
               setError('');
 
               console.log("Connexion réussie ! Token :", response.data.token);
-            
+              setMessage({ type: "success", text: "Connexion réussie !" });
+
+              setTimeout(() => {
+                navigate("/accueilDashboard");
+              }, 2200);
+
             } catch (err) {
-              setError("Informations incorrectes !");
+              console.error("Erreur lors de la connexion:", err.response ? err.response.data : err);
+              setError({ type: "error", text: err.response ? err.response.data.message : "Erreur inconnue." });
             }
           
     };
@@ -154,7 +160,7 @@ function Connexion () {
 
                         <div class="flex items-center justify-between">
 
-                          <button class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={handleLogin}>
+                          <button class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Se connecter
                           </button>
 

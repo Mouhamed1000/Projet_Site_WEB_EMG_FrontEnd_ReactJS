@@ -39,7 +39,7 @@ function EditModele({ modeleId }) {
     useEffect(() => {
 
     if (message.text) {
-        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
+        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
         return () => clearTimeout(timer);
       }
 
@@ -56,7 +56,7 @@ function EditModele({ modeleId }) {
      return;
    }
 
-    axios.put(`https://votre-api-url.com/modele/${modeleId}`, modele, {
+    axios.put(`http://localhost:32000/api/Modele/modele/${modeleId}`, modele, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}` 
       }

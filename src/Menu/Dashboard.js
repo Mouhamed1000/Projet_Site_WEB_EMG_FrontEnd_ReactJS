@@ -17,7 +17,11 @@ function Dashboard () {
     const logout = () => {
         //On supprime le token
         localStorage.removeItem("token");
-        navigate("/accueil");
+
+        setTimeout(() => {
+            navigate("/");
+          }, 2200);
+
     };
 
     //En cas d'erreur 404

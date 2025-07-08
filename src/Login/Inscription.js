@@ -36,7 +36,7 @@ function Inscription ()
     //Disparition automatique des messages
     useEffect(() => {
      if (message.text) {
-         const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
+         const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
          return () => clearTimeout(timer);
        }
     }, [message]);
@@ -44,13 +44,13 @@ function Inscription ()
     const handleRegister = async (e) => {
       e.preventDefault();
 
-      if (!firstName.trim() || !lastName.trim() || !email.trim() || !password().trim()) {
+      if (!firstName.trim() || !lastName.trim() || !email.trim() || !password.trim()) {
         setMessage({ type: "error", text: "Tous les champs sont requis." });
         return;
       }
 
       try {
-              const response = await axios.post('http://localhost:32000/api/auth/register', {
+              const response = await axios.post('http://localhost:32000/api/authentication/register', {
               _firstName: firstName,
               _lastName: lastName,
               _email: email,
@@ -58,7 +58,7 @@ function Inscription ()
               _profil: _profil
           }, 
           {
-            Headers : { "Content-Type": "application/json" }, 
+            headers : { "Content-Type": "application/json" }, 
           }
           );
 
@@ -66,12 +66,18 @@ function Inscription ()
           //On sauvegarde le token dans le localStorage
           localStorage.setItem('jwtToken', response.data.token);  
 
-          console.log("Connexion réussie ! Token :", response.data.token);
+          console.log("Inscription réussie ! Token :", response.data.token);
+
+          setMessage({ type: "success", text: "Inscription réussie." });
 
           console.log(response.data);
 
         } catch (error) {
             console.error('Erreur lors de l\'inscription :', error.response.data.message);
+            setMessage({ 
+              type: "error", 
+              text: error.response ? error.response.data.message : "Erreur de connexion au serveur." 
+          });
         }
 
     };
@@ -81,7 +87,7 @@ function Inscription ()
 
                 <section class="flex justify-center items-center w-full max-w-2xs mt-6">
 
-                    <form  onSubmit={handleRegister} class="w-full max-w-lg">
+                    <form onSubmit={handleRegister} class="w-full max-w-lg">
 
                         <h2 class="text-center text-2xl mb-6">Inscription {_profil}</h2>
 
@@ -142,7 +148,7 @@ function Inscription ()
 
                         <div class="flex items-center justify-between">
 
-                          <button class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                          <button class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Inscription
                           </button>
 

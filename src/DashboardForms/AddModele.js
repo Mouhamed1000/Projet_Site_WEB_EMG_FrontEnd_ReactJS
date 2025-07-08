@@ -18,7 +18,7 @@ function AddModele() {
   //Disparition du message apres 5 secondes
   useEffect(() => {
     if (message.text) {
-        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
+        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
         return () => clearTimeout(timer);
     }
   }, [message]);

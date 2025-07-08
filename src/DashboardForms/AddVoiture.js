@@ -20,14 +20,14 @@ function AddVoiture() {
   const [modeles, setModeles] = useState([]);
 
   //Utilisation de useState() pour gérer le messages flash
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState({ type: "", text: "" });
   //Utilisation de useState() pour gérer le loading lors de la soumission du formulaire
   const [loading, setLoading] = useState(false);
 
   //Disparition du message apres 5 secondes
   useEffect(() => {
-    if (message.text) {
-        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
+    if (message && message.text) {
+        const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
         return () => clearTimeout(timer);
     }
   }, [message]);
@@ -45,7 +45,7 @@ function AddVoiture() {
   useEffect(() => {
     //Une fois que la marque est sélectionnée
     if (formData.marqueId) {
-      axios.get(`http://localhost:32000/api/Modele/modeles/${formData.marqueId}`)
+     axios.get(`http://localhost:32000/api/Modele/modeles/${formData.marqueId}`)
           .then(response => setModeles(response.data))
           .catch(error => {
             console.error("Erreur lors du chargement des modèles", error);
@@ -59,7 +59,7 @@ function AddVoiture() {
   //Diparition du message apres 5 secondes
   useEffect(() => {
       if (message.text) {
-          const timer = setTimeout(() => setMessage({ type: "", text: "" }), 32000);
+          const timer = setTimeout(() => setMessage({ type: "", text: "" }), 5000);
           return () => clearTimeout(timer);
       }
     }, [message]);
