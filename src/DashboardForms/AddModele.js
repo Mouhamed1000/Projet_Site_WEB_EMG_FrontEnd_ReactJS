@@ -39,7 +39,8 @@ function AddModele() {
 
     //Verification des champs
     if (!nomModele || !anneeModele || !marqueId) {
-      setMessage({ type: "success", text: "Tous les champs sont obligatoires !" });
+      setMessage({ type: "error", text: "Tous les champs sont obligatoires !" });
+      setLoading(false);
       return;
     }
 
@@ -67,8 +68,7 @@ function AddModele() {
     } catch (error) {
 
       console.error("Erreur lors de l'ajout du modèle :", error);
-      setMessage({ type: "success", text: "Voiture ajoutée avec succès !" });
-
+      setMessage({ type: "error", text: "Erreur lors de l'ajout du modèle !" });
     } finally {
       setLoading(false);
     }
