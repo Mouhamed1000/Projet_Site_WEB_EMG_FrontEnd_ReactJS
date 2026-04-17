@@ -42,8 +42,8 @@ function AddMarque() {
     try {
       //Appel au back-end en utilisant Axios
       const response = await axios.post("http://localhost:32000/api/Marque", {
-        NomMarq : nomMarque,
-        ListModele : modeles.map(nom => ({ nomModele: nom }))
+        nomMarque : nomMarque,
+        modeles : modeles.map(nom => ({ nomModele: nom }))
       },
       {
         headers : { "Content-Type": "application/json",}

@@ -6,7 +6,7 @@ function AddVoiture() {
 
   //Utilisation de useState() pour gérer les valeurs des champs
   const [formData, setFormData] = useState({
-    statutVoiture : "",
+    statut : "",
     photo : null,
     description : "",
     anneeVoiture : "",
