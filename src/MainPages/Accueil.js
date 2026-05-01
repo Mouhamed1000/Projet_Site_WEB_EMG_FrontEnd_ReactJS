@@ -32,7 +32,7 @@ function Accueil () {
           
           <section className="flex flex-col justify-center w-screen items-center overflow-hidden p-4 tracking-wide">
           
-            <h1 className="text-center underline decoration-double mt-2 text-2xl mb-">Voitures disponibles </h1>
+            <h1 className="text-center underline decoration-double mt-2 text-2xl">Voitures disponibles </h1>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
@@ -56,7 +56,7 @@ function Accueil () {
 
                   <div className="text-center w-screen tracking-wider">
                     
-                    <p className="text-xl mt-20 mb-10 w-screen tracking-wider"> Aucune voiture disponible ! </p>
+                    <p className="text-xl mt-20 mb-20 w-screen tracking-wider"> Aucune voiture disponible ! </p>
 
                     <NavLink to="/identification" className="bg-cyan-600 text-white shadow rounded text-xl p-4"> Cliquez pour ajouter </NavLink>
 

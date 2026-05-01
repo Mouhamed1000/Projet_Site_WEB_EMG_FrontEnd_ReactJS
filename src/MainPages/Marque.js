@@ -1,6 +1,6 @@
 function Marque () {
     return(
-        <p> Marque </p>
+        <p className="text-2xl text-center mt-6 underline decoration-double tracking-wider "> Marques disponibles </p>
     );
 }
 
