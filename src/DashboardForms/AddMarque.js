@@ -55,7 +55,15 @@ function AddMarque() {
       setModeles([]);
 
     } catch (error) {
-      setMessage({ type: "error", text: "Erreur lors de l'ajout de la marque." });
+
+      console.log(error);
+
+      console.log(error.response);
+
+      console.log("Data : ", error.response?.data)
+
+      setMessage({ type: "error", text: error.response?.data?.message || error.message || "Erreur lors de l'ajout de la marque." });
+    
     }
   };
 

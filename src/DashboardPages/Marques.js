@@ -85,9 +85,14 @@ function Marques() {
                         {marques.length > 0 ? (
                             marques.map((marque) => (
                                 <tr key={marque.id}>
-                                    <td>{marque.id}</td>
-                                    <td>{marque.nom}</td>
-                                    <td>{marque.modeles ? marque.modeles.length : 0}</td>   
+                                    <td>{marque.marqueId}</td>
+                                    <td>{marque.nomMarque}</td>
+                                    <td>
+                                        { marque.modeles?.length
+                                            ? marque.modeles.map(m => m.nomModele).join(", ")
+                                            : "Aucun modèle"
+                                        }
+                                    </td>
                                     <td>
                                         <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditMarque(marque.id)}>Modifier</button>
                                     </td>
