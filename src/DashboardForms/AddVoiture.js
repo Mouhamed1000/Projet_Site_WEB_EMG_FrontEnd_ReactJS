@@ -82,16 +82,18 @@ function AddVoiture() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage(null);
+    setMessage({ type: "", text: "" });
 
     if (formData.anneeVoiture < 2010) {
       setMessage({ type: "error", text: "L'année de la voiture doit être supérieure à 2010." });
+      setLoading(false);
       return;
     }
 
     //Verification des champs
-    if (!formData.photo || !formData.statutVoiture || !formData.description || !formData.anneeVoiture || !formData.marqueId) {
-      setMessage({ type: "success", text: "Tous les champs sont obligatoires !" });
+    if (!formData.photo || !formData.statut || !formData.description || !formData.anneeVoiture || !formData.marqueId || !formData.modeleId) {
+      setMessage({ type: "error", text: "Tous les champs sont obligatoires !" });
+      setLoading(false);
       return;
     }
 
@@ -99,11 +101,12 @@ function AddVoiture() {
       //On récupère les champs du formulaire
       const data = new FormData();
       data.append("file", formData.photo);
-      data.append("_statut", formData.statutVoiture);
+      data.append("_statut", formData.statut);
       data.append("_photo", formData.photo ? formData.photo.name : "");
       data.append("_description", formData.description);
       data.append("_anneeVoiture", formData.anneeVoiture);
       data.append("_MarqueId", formData.marqueId);
+      data.append("_ModeleId", formData.modeleId);
 
       //Ensuite, on envoie ses données par méthode post à notre back-end en utilisant axios(...)
       const response = await axios.post("http://localhost:32000/api/Voiture/upload-and-create", data, {
@@ -113,12 +116,14 @@ function AddVoiture() {
       setMessage({ type: "success", text: "Voiture ajoutée avec succès !" });
 
       //Après on réintialise le formulaire
-      setFormData.statutVoiture("");
-      setFormData.photo("");
-      setFormData.description(""); 
-      setFormData.anneeVoiture(""); 
-      setFormData.marqueId(""); 
-      setFormData.modeleId(""); 
+      setFormData({
+        statut: "",
+        photo: null,
+        description: "",
+        anneeVoiture: "",
+        marqueId: "",
+        modeleId: ""
+      });
 
     } catch (error) {
 
@@ -136,7 +141,7 @@ function AddVoiture() {
 
             <section className="flex-1 min-h-screen w-full flex justify-center items-center ">
                 
-                <form className="ml-64 w-5/6 max-w-xl bg-white shadow-xl rounded px-8 pt-6 pb-8 shadow-none">
+                <form onSubmit={handleSubmit} className="ml-64 w-5/6 max-w-xl bg-white shadow-xl rounded px-8 pt-6 pb-8 shadow-none">
 
                     <h2 className="mb-2 text-center text-2xl font-semibold text-gray-800">Ajout de Voiture</h2>
 
@@ -147,8 +152,8 @@ function AddVoiture() {
                     )}
 
                     <div className="mb-4">
-                      <label htmlFor="statutVoiture" className="block text-sm font-medium text-gray-700">Statut de la Voiture</label>
-                      <select id="statutVoiture" value={formData.statutVoiture} onChange={handleChange} className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg">
+                      <label htmlFor="statut" className="block text-sm font-medium text-gray-700">Statut de la Voiture</label>
+                      <select id="statut" value={formData.statut} onChange={handleChange} className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg">
                         <option value="">Sélectionner un statut</option>
                         <option value="Disponible">Disponible</option>
                         <option value="Vendue">Vendue</option>
@@ -157,7 +162,7 @@ function AddVoiture() {
 
                     <div className="mb-4">
                       <label htmlFor="photo" className="block text-sm font-medium text-gray-700">Photo de la Voiture</label>
-                      <input type="file" id="photo" value={formData.photo} onChange={handleFileChange} className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg"/>
+                      <input type="file" id="photo" onChange={handleFileChange} className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg"/>
                     </div>
 
                     <div className="mb-4">
@@ -179,7 +184,7 @@ function AddVoiture() {
                               <option value=""> Choisir une marque</option>
                               {
                                 marques.map( (marque) => (
-                                  <option key={marque.id} value={marque.id}>{marque.nomMarque}</option>
+                                  <option key={marque.marqueId} value={marque.marqueId}>{marque.nomMarque}</option>
                                 ))
                               }
                             </select>
@@ -195,7 +200,7 @@ function AddVoiture() {
                         <option value="">Sélectionner un modele</option>
                         {modeles.length > 0 ? (
                                 modeles.map((modele) => (
-                                    <option key={modele.id} value={modele.id}>{modele.nomModele }</option>
+                                    <option key={modele.modeleId} value={modele.modeleId}>{modele.nomModele }</option>
                                 ))
                             ) : (
                                 <option disabled>Aucun modele disponible</option>

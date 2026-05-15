@@ -85,7 +85,7 @@ function Inscription ()
     return (
         <>
 
-                <section class="flex justify-center items-center w-full max-w-2xs mt-6">
+                <section class="flex h-[80vh] justify-center items-center w-full h-max-w-2xs mt-6">
 
                     <form onSubmit={handleRegister} class="w-full max-w-lg">
 

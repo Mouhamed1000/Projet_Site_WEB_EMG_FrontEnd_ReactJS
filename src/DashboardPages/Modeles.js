@@ -47,7 +47,7 @@ function Modeles() {
     //Fonction pour récupérer tous les modèles en utilisant l'Api Axios
     const getModeles = async () => {
         try {
-            const response = axios.get("http://localhost:32000/api/Modele/GetAllModelesFromTable");
+            const response = await axios.get("http://localhost:32000/api/Modele");
             //On met à jour l'état avec les modèles récupérées
             setModeles(response.data);
         } catch (error) {
@@ -55,7 +55,7 @@ function Modeles() {
         }
     }
 
-    //On récupère le modèle lors la page est prête
+    //On récupère le modèle lorsque la page est prête
     useEffect(() => {
 
       getModeles();
@@ -92,10 +92,10 @@ function Modeles() {
                       modeles.map((modele) => (
 
                         <tr key={modele.id}>
-                          <td>{modele.id}</td>
-                          <td>{modele.nom}</td>
-                          <td>{modele.annee}</td>
-                          <td>{modele.marqueNom}</td>
+                          <td>{modele.modeleId}</td>
+                          <td>{modele.nomModele}</td>
+                          <td>{modele.anneeModele}</td>
+                          <td>{modele.marqueId}</td>
                       
                           <td>
                             <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600"onClick={() => EditModele(modele.id)}>Modifier</button>

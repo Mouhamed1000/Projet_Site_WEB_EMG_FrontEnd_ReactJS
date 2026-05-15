@@ -28,13 +28,13 @@ function Marque () {
         <>
             <p className="text-2xl text-center mt-6 underline decoration-double tracking-wider "> Marques disponibles </p>
 
-            <div className="flex items-center content-center flex-wrap h-80 w-full">
+            <div className="flex flex-wrap items-center justify-around flex-wrap h-80 w-full">
 
                 {marques.length > 0 ? (
 
                     marques.map((marque) => (
 
-                        <div key={marque.id} className="p-8 shadow-lg rounded">
+                        <div key={marque.id} className="p-8 w-80 flex justify-center items-center h-24 shadow-xl rounded">
 
                             <p className="tracking-wider text-xl"> {marque.nomMarque} </p>
 
