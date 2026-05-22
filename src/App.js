@@ -49,7 +49,7 @@ function App() {
           <Route path="/addModele" element={<AddModele />}/>
           <Route path="/editModele" element={<EditModele />} />
 
-          <Route path="/voitures/details/:id" element={<VoitureDetails />} />
+          <Route path="/DetailsVoiture/:id" element={<VoitureDetails />} />
 
         </Routes>
     

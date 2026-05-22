@@ -47,7 +47,7 @@ function Voitures() {
 
       try {
 
-        const response = await axios.get("http://localhost:32000/api/Voiture/GetAllVoitures");
+        const response = await axios.get("http://localhost:32000/api/Voiture");
         //On met à jour l'état avec les voitures récupérées
         setVoitures(response.data); 
       
@@ -94,16 +94,16 @@ function Voitures() {
 
                           <tr key={voiture.id}>
 
-                            <td>{voiture.id}</td>
+                            <td>{voiture.voitureId}</td>
                             <td>{voiture.statut}</td>
 
                             <td>
-                              <img src={voiture.photoUrl} alt="Voiture" class="w-16 h-16 object-cover" />
+                              <img src={`http://localhost:32000${voiture.photo}`} alt="Voiture" class="w-16 h-16 object-cover" />
                             </td>
 
                             <td>{voiture.description}</td>
-                            <td>{voiture.annee}</td>
-                            <td>{voiture.marque}</td>
+                            <td>{voiture.anneeVoiture}</td>
+                            <td>{voiture.marqueId}</td>
 
                             <td>
                               <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditVoiture(voiture.id)}>Modifier</button>

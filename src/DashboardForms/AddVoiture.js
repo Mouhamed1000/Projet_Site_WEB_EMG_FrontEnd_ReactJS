@@ -101,12 +101,11 @@ function AddVoiture() {
       //On récupère les champs du formulaire
       const data = new FormData();
       data.append("file", formData.photo);
-      data.append("_statut", formData.statut);
-      data.append("_photo", formData.photo ? formData.photo.name : "");
-      data.append("_description", formData.description);
-      data.append("_anneeVoiture", formData.anneeVoiture);
-      data.append("_MarqueId", formData.marqueId);
-      data.append("_ModeleId", formData.modeleId);
+      data.append("statut", formData.statut);
+      data.append("description", formData.description);
+      data.append("anneeVoiture", formData.anneeVoiture);
+      data.append("marqueId", formData.marqueId);
+      data.append("modeleId", formData.modeleId);
 
       //Ensuite, on envoie ses données par méthode post à notre back-end en utilisant axios(...)
       const response = await axios.post("http://localhost:32000/api/Voiture/upload-and-create", data, {
@@ -128,6 +127,11 @@ function AddVoiture() {
     } catch (error) {
 
       console.error("Erreur lors de l'ajout de la voiture", error);
+
+      if (error.response){
+        console.log("DATA :", error.response.data);
+        console.log("STATUS :", error.response.status);
+      }
       setMessage({ type: "error", text: "Échec de l'ajout de la voiture." });
 
     } finally {
