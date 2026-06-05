@@ -58,9 +58,9 @@ function Accueil () {
                   
                     <img src={`http://localhost:32000${voiture.photo}`} alt={voiture.modeleId} className="h-60 object-cover mb-4 cursor-pointer" onClick={() => VoitureDetails(voiture.id)} />
                   
-                    <h3 className="text-lg font-semibold">{voiture.modeleId}</h3>
+                    <h3 className="text-lg font-semibold">{voiture.modele?.nomModele}</h3>
                  
-                    <p className="text-sm">{voiture.marqueId}</p>
+                    <p className="text-sm">{voiture.marque?.nomMarque}</p>
 
                     <button className="bg-blue-500 text-white p-2 rounded-md mt-4 hover:bg-blue-600 shadow" onClick={() => voirDetails(voiture.voitureId)} > Voir Détails </button>
                

@@ -54,12 +54,12 @@ function VoitureDetails () {
             
                     <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center max-w-lg w-full">
                 
-                        <img src={`http://localhost:32000${voiture.photo}`} alt={voiture.modeleId} className="w-90 object-cover rounded-md" />
+                        <img src={`http://localhost:32000${voiture.photo}`} alt={voiture.modele?.nomModele} className="w-90 object-cover rounded-md" />
             
                         <div className="mt-4 text-center">
 
-                            <h2 className="text-xl font-semibold">Id: {voiture.modeleId}</h2>
-                            <p className="text-gray-700">Marque : {voiture.marqueId}</p>
+                            <p className="text-gray-700">Marque : {voiture.marque?.nomMarque}</p>
+                            <p className="text-gray-700 font-bold">Modele : {voiture.modele?.nomModele}</p>
                             <p className="text-gray-700">Année : {voiture.anneeVoiture}</p>
                             <p className="text-gray-700">Statut : {voiture.statut}</p>
                             <p className="text-gray-700 mt-2">{voiture.description}</p>

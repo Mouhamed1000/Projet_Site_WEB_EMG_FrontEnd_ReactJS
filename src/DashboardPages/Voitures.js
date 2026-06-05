@@ -103,7 +103,7 @@ function Voitures() {
 
                             <td>{voiture.description}</td>
                             <td>{voiture.anneeVoiture}</td>
-                            <td>{voiture.marqueId}</td>
+                            <td>{voiture.marque?.nomMarque}</td>
 
                             <td>
                               <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditVoiture(voiture.id)}>Modifier</button>
