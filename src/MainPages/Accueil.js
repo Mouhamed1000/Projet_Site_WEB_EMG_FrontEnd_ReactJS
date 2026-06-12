@@ -46,7 +46,7 @@ function Accueil () {
     return (
         <>
           
-          <section className="flex flex-col justify-center w-full items-center overflow-hidden p-4 tracking-wider">
+          <section className="flex flex-col justify-center w-full items-center h-full mb-12 overflow-hidden p-4 tracking-wider">
           
             <h1 className="text-center underline decoration-double mt-2 text-2xl">Voitures disponibles </h1>
 

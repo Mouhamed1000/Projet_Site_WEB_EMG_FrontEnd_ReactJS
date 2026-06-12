@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Dashboard from "../Menu/Dashboard";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 function Modeles() {
 
@@ -66,54 +67,63 @@ function Modeles() {
         <>
             <Dashboard />
             
-            <section class="ml-64 flex flex-col justify-center items-center overflow-hidden p-4 shadow-2xl tracking-wide">
+            <section className="ml-64 flex flex-col justify-center items-center h-screen p-4 shadow-2xl tracking-wide">
                 
                 
-                <h1 class="text-center text-2xl mb-4">Liste Modeles</h1>
+                <h1 className="text-center text-2xl mb-4">Liste Modeles</h1>
 
-                <button class="bg-cyan-600 p-2 rounded-md text-xl hover:bg-sky-600 mb-6 absolute right-10 top-10 mb-10" onClick={AddModele}>Ajouter</button>
+                <button className="bg-cyan-600 p-2 rounded-md text-xl hover:bg-sky-600 mb-6 absolute right-10 top-10 mb-10" onClick={AddModele}>Ajouter</button>
 
-                <table class="mt-12 text-xl table-fixed bg-cyan-100 border-solid border-blue-500 w-full text-center border-collapse md:border-separate">  
+                <div className="flex-1 overflow-auto">
+              
+                  <table className="mt-12 text-xl shadow-md flex-1 overflow-auto table-fixed border-solid border-blue-500 w-full text-center border-collapse md:border-separate">  
 
-                    <thead> 
+                      <thead> 
+                          <tr className="bg-sky-100">
+                              <th>ID</th>     
+                              <th>Nom</th> 
+                              <th>Annee</th>
+                              <th>Marque</th>
+                              <th colSpan={2}>Actions</th>
+                          </tr>  
+                      </thead>  
+
+                      <tbody>     
+
+                      {modeles && modeles.length > 0 ? (
+
+                        modeles.map((modele) => (
+
+                          <tr key={modele.id} className="odd:bg-sky-100 even:bg-sky-200">
+                            <td>{modele.modeleId}</td>
+                            <td>{modele.nomModele}</td>
+                            <td>{modele.anneeModele}</td>
+                            <td>{modele.marqueId}</td>
+                        
+                            <td>
+                              <button className="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600"onClick={() => EditModele(modele.id)}>
+                                <FaEdit size={22}/>
+                              </button>
+                            </td>
+                        
+                            <td>
+                              <button className="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteModele(modele.id)}>
+                                <FaTrash size={22}/>
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
                         <tr>
-                            <th>ID</th>     
-                            <th>Nom</th> 
-                            <th>Annee</th>
-                            <th>Marque</th>
-                            <th colSpan={2}>Actions</th>
-                        </tr>  
-                    </thead>  
-                    
-                    <tbody>     
-
-                    {modeles && modeles.length > 0 ? (
-
-                      modeles.map((modele) => (
-
-                        <tr key={modele.id}>
-                          <td>{modele.modeleId}</td>
-                          <td>{modele.nomModele}</td>
-                          <td>{modele.anneeModele}</td>
-                          <td>{modele.marqueId}</td>
-                      
-                          <td>
-                            <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600"onClick={() => EditModele(modele.id)}>Modifier</button>
-                          </td>
-                      
-                          <td>
-                            <button className="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteModele(modele.id)}>Supprimer</button>
-                          </td>
+                          <td colSpan="6">Aucun modèle disponible</td>
                         </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="6">Aucun modèle disponible</td>
-                      </tr>
-                    )}
+                      )}
 
-                    </tbody>
-                </table>
+                      </tbody>
+                  </table>
+
+                </div>
+
             </section>
         </>    
     );

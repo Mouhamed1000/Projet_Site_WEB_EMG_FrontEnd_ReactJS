@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Dashboard from "../Menu/Dashboard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 function Marques() {
 
@@ -63,17 +64,19 @@ function Marques() {
         <>
             <Dashboard />
             
-            <section class="ml-64 flex flex-col justify-center items-center overflow-hidden p-4 shadow-2xl tracking-wide">
+            <section class="ml-64 flex flex-col justify-center items-center h-screen p-4 shadow-2xl tracking-wide">
                 
                 
                 <h1 class="text-center text-2xl mb-4">Liste Marques</h1>
 
                 <button class="bg-cyan-600 p-2 rounded-md text-xl hover:bg-sky-600 mb-6 absolute right-10 top-10 mb-10" onClick={AddMarque}>Ajouter</button>
 
-                <table class="mt-12 text-xl table-fixed bg-blue-100 border-solid border-blue-500 w-full text-center border-collapse md:border-separate">  
+                <div className="flex-1 overflow-auto">
+
+                    <table class="mt-12 text-xl table-fixed shadow-md border-solid border-blue-500 w-full text-center border-collapse">  
 
                     <thead> 
-                        <tr>
+                        <tr className="bg-gray-100">
                             <th>ID</th>     
                             <th>Nom</th> 
                             <th>Modeles</th>
@@ -84,7 +87,7 @@ function Marques() {
                     <tbody>
                         {marques.length > 0 ? (
                             marques.map((marque) => (
-                                <tr key={marque.id}>
+                                <tr key={marque.id} className="odd:bg-gray-100 even:bg-gray-200">
                                     <td>{marque.marqueId}</td>
                                     <td>{marque.nomMarque}</td>
                                     <td>
@@ -94,10 +97,18 @@ function Marques() {
                                         }
                                     </td>
                                     <td>
-                                        <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditMarque(marque.id)}>Modifier</button>
+                                        <div className="flex justify-center gap-4">
+                                            <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditMarque(marque.id)}>
+                                                <FaEdit size={22}/>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
-                                        <button class="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteMarque(marque.id)}>Supprimer</button>
+                                        <div className="flex justify-center gap-4">
+                                            <button class="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteMarque(marque.id)}>
+                                                <FaTrash size={22}/>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))
@@ -108,7 +119,9 @@ function Marques() {
                         )}     
 
                     </tbody>
-                </table>
+                    </table>
+
+                </div>
             </section>
         </>
     );

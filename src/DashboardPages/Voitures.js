@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Dashboard from "../Menu/Dashboard";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 function Voitures() {
 
@@ -67,23 +68,25 @@ function Voitures() {
         <>
             <Dashboard />
             
-            <section class="ml-64 flex flex-col justify-center items-center overflow-hidden p-4 shadow-2xl tracking-wide">
+            <section className="ml-64 flex flex-col justify-center h-screen items-center p-4 shadow-2xl tracking-wider">
                 
                 
-                <h1 class="text-center text-2xl mb-4">Liste Voitures</h1>
+                <h1 className="text-center text-2xl mb-4">Liste Voitures</h1>
 
-                <button class="bg-cyan-600 p-2 rounded-md text-xl hover:bg-sky-600 mb-6 absolute right-10 top-10 mb-10" onClick={AddVoiture}>Ajouter</button>
+                <button className="bg-cyan-600 p-2 rounded-md text-xl hover:bg-sky-600 mb-6 absolute right-10 top-10 mb-10" onClick={AddVoiture}>Ajouter</button>
 
-                <table class="mt-12 text-xl table-fixed bg-sky-100 border-solid border-blue-500 w-full text-center border-collapse md:border-separate">  
+                <div className="flex-1 overflow-auto">
+                  
+                  <table className="mt-12 text-xl shadow-md table-fixed w-full text-center border-collapse">  
 
                     <thead> 
-                        <tr>
-                            <th>ID</th>     
-                            <th>Statut</th> 
+                        <tr className="border-t-2 border-gray-400 border-b-2 border-gray-400">
+                            <th >ID</th>     
+                            <th >Statut</th> 
                             <th>Photo</th>
-                            <th>Description</th>
-                            <th>Annee</th>
-                            <th>Marque</th>
+                            <th >Description</th>
+                            <th >Annee</th>
+                            <th >Marque</th>
                             <th colSpan={2}>Actions</th>
                         </tr>  
                     </thead>  
@@ -92,25 +95,39 @@ function Voitures() {
 
                       {voitures.map((voiture) => (
 
-                          <tr key={voiture.id}>
+                          <tr key={voiture.id} className="border-b border-gray-300">
 
                             <td>{voiture.voitureId}</td>
                             <td>{voiture.statut}</td>
 
                             <td>
-                              <img src={`http://localhost:32000${voiture.photo}`} alt="Voiture" class="w-16 h-16 object-cover" />
+                              <div className="flex justify-center gap-4">
+                                <img src={`http://localhost:32000${voiture.photo}`} alt="Voiture" className="w-16 h-16 object-cover" />
+                              </div>
                             </td>
 
                             <td>{voiture.description}</td>
                             <td>{voiture.anneeVoiture}</td>
                             <td>{voiture.marque?.nomMarque}</td>
 
-                            <td>
-                              <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditVoiture(voiture.id)}>Modifier</button>
+                            <td className="p-2">
+
+                              <div className="flex justify-center gap-4">
+                                  <button className="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditVoiture(voiture.id)}>
+                                    <FaEdit size={22} />
+                                  </button>
+                              </div>
+
                             </td>
 
-                            <td>
-                              <button class="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteVoiture(voiture.id)}>Supprimer</button>
+                            <td className="p-2">
+
+                              <div className="flex justify-center gap-4">
+                                <button className="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteVoiture(voiture.id)}>
+                                  <FaTrash size={22} />
+                                </button>
+                              </div>
+                              
                             </td>
 
                           </tr>
@@ -118,7 +135,9 @@ function Voitures() {
 
                     </tbody>
 
-                </table>
+                  </table>
+
+                </div>
 
             </section>
         </>
