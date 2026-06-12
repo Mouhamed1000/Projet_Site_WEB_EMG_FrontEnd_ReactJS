@@ -2,7 +2,9 @@
 
 ## 📌 Description
 
-L'objectif était ici de créer le frontend en ReactJS pour le projet de site EMG ([Backend du projet EMG](https://github.com/Mouhamed1000/Projet_Site_WEB_EMG_BackEnd_C_Sharp)). Donc ici je gère les interfaces d'affichage des voitures pour les visiteurs ainsi que les interfaces de connexion de l'administrateur. Donc l'administrateur après s'être conneté, il peut interagir avec le système via son interface pour l'ajout, la modification ou le suppression des voitures, marques, mdèles...
+L'objectif était ici de créer le frontend en React JS pour le projet de site EMG ([Backend du projet EMG](https://github.com/Mouhamed1000/Projet_Site_WEB_EMG_BackEnd_C_Sharp)). 
+
+Donc ici je gère les interfaces d'affichage de voitures pour les visiteurs ainsi que les interfaces de connexion de l'administrateur et du personnel. L'administrateur ou le personnel après s'être conneté, il peut interagir avec le système via l'interface pour l'ajout, la modification ou la suppression des voitures, marques, modèles en fonction des privilèges octroyés ...
 
 ### 🔥 Installation du projet
 
@@ -22,3 +24,7 @@ npm install
 ```bash
 npm start
 ```
+
+### 🔔 Info
+
+- version de React utilisée : 19.0.0
