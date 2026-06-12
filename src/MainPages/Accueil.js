@@ -9,6 +9,7 @@ function Accueil () {
 
       //Définition des états
       const [voitures, setVoitures] = useState([]);
+      const [loading, setLoading] = useState(true);
       const navigate = useNavigate();
           
       // Fonction pour récupérer les voitures
@@ -24,6 +25,8 @@ function Accueil () {
 
                 console.error("Erreur lors de la récupération des voitures", error);
 
+            } finally {
+              setLoading(false);
             }
       };
 
@@ -50,7 +53,14 @@ function Accueil () {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-6">
 
-              {voitures.length > 0 ? (
+              
+              { loading ? (
+
+                <div className="col-span-full flex justify-center items-center py-20">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                </div>
+
+              ) : voitures.length > 0 ? (
 
                 voitures.map((voiture) => (
 
@@ -65,7 +75,8 @@ function Accueil () {
                     <button className="bg-blue-500 text-white p-2 rounded-md mt-4 hover:bg-blue-600 shadow" onClick={() => voirDetails(voiture.voitureId)} > Voir Détails </button>
                
                   </div>
-              ))
+
+                ))
               ) : (
 
                   <div className="text-center w-screen tracking-wider">
