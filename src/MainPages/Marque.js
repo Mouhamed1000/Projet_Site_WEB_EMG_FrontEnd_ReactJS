@@ -6,6 +6,7 @@ function Marque () {
 
     //Définition des états
     const [marques, setMarques] = useState([]);
+    //Ajout du Loading
     const [loading, setLoading] = useState(true);
 
     //Fonction pour récupérer les marques au chargement

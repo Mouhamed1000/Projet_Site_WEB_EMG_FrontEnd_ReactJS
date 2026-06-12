@@ -9,6 +9,7 @@ function Accueil () {
 
       //Définition des états
       const [voitures, setVoitures] = useState([]);
+      //Ajout du loading
       const [loading, setLoading] = useState(true);
       const navigate = useNavigate();
           
