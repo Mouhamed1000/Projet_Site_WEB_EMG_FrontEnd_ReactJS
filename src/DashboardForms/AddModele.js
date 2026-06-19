@@ -6,7 +6,6 @@ function AddModele() {
 
   //Etats pour le formulaire
   const [nomModele, setNomModele] = useState("");
-  const [anneeModele, setAnneeModele] = useState("");
   const [marqueId, setMarqueId] = useState("");
   const [marques, setMarques] = useState([]);
 
@@ -38,7 +37,7 @@ function AddModele() {
     setMessage(null);
 
     //Verification des champs
-    if (!nomModele || !anneeModele || !marqueId) {
+    if (!nomModele || !marqueId) {
       setMessage({ type: "error", text: "Tous les champs sont obligatoires !" });
       setLoading(false);
       return;
@@ -47,7 +46,6 @@ function AddModele() {
     //Objet newModele contenant les données à envoyer
     const newModele = {
       nomModele,
-      anneeModele: parseInt(anneeModele),
       marqueId: parseInt(marqueId ),
     };
 
@@ -62,7 +60,6 @@ function AddModele() {
 
       //Après on réintialise le formulaire
       setNomModele("");
-      setAnneeModele("");
       setMarqueId("");
 
     } catch (error) {
@@ -93,11 +90,6 @@ function AddModele() {
                   <div className="mb-6">
                     <label htmlFor="nomModele" className="block text-base font-medium text-gray-700">Nom du Modele</label>
                     <input type="text" id="nomModele" value={nomModele} onChange={(e) => setNomModele(e.target.value)} className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg" placeholder="Entrez le nom du modèle"/>
-                  </div>
-
-                  <div className="mb-6">
-                    <label htmlFor="anneeModele" className="block text-base font-medium text-gray-700">Année du Modele</label>
-                    <input type="number" id="anneeModele" value={anneeModele} onChange={(e) => setAnneeModele(e.target.value)} className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg" placeholder="Entrez l'année du modèle"/>
                   </div>
 
                   <div className="mb-6">

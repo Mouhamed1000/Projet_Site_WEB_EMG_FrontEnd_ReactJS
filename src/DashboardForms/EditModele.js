@@ -7,7 +7,6 @@ function EditModele({ modeleId }) {
   //Definition des etats
   const [modele, setModele] = useState({
     nomModele: '',
-    anneeModele: '',
     marqueId: ''
   });
 
@@ -51,7 +50,7 @@ function EditModele({ modeleId }) {
     setMessage(null);
 
    //Verification des champs
-   if (!modele.nomModele || !modele.anneeModele || !modele.marqueId) {
+   if (!modele.nomModele || !modele.marqueId) {
      setMessage({ type: "success", text: "Tous les champs sont obligatoires !" });
      return;
    }
@@ -66,7 +65,6 @@ function EditModele({ modeleId }) {
       
       //Après on réintialise le formulaire
       setModele.nomModele("");
-      setModele.anneeModele("");
       setModele.marqueId("");
     })
     .catch(error => {
@@ -105,11 +103,6 @@ function EditModele({ modeleId }) {
                       <div className="mb-6">
                         <label htmlFor="nomModele" className="block text-base font-medium text-gray-700">Nom du Modele</label>
                         <input type="text" id="nomModele" className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg" value= {modele.nomModele} onChange={handleChange} placeholder="Entrez le nom du modèle"/>
-                      </div>
-
-                      <div className="mb-6">
-                        <label htmlFor="anneeModele" className="block text-base font-medium text-gray-700">Année du Modele</label>
-                        <input type="number" id="anneeModele" value={modele.anneeModele} onChange= {handleChange} className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg" placeholder="Entrez l'année du modèle"/>
                       </div>
 
                       <div className="mb-6">

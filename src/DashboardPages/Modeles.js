@@ -82,7 +82,6 @@ function Modeles() {
                           <tr className="bg-sky-100">
                               <th>ID</th>     
                               <th>Nom</th> 
-                              <th>Annee</th>
                               <th>Marque</th>
                               <th colSpan={2}>Actions</th>
                           </tr>  
@@ -97,7 +96,6 @@ function Modeles() {
                           <tr key={modele.id} className="odd:bg-sky-100 even:bg-sky-200">
                             <td>{modele.modeleId}</td>
                             <td>{modele.nomModele}</td>
-                            <td>{modele.anneeModele}</td>
                             <td>{modele.marqueId}</td>
                         
                             <td>
