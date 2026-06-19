@@ -114,11 +114,11 @@ function Connexion () {
 
     return (
         < >
-                <section class="min-h-screen w-full flex justify-center items-center max-w-2xs">
+                <section className="min-h-screen w-full flex justify-center items-center max-w-2xs">
 
-                    <form onSubmit={handleLogin} class="bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-14">
+                    <form onSubmit={handleLogin} className="bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-14">
 
-                        <h2 class="text-center text-2xl mb-6">Connexion {profil}</h2>
+                        <h2 className="text-center text-2xl mb-6">Connexion {profil}</h2>
 
                         {message.text && (
                           <div className={`p-3 mb-4 rounded ${message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
@@ -127,28 +127,28 @@ function Connexion () {
                         )}
 
                         {error.text && (
-                          <div class="p-3 mb-4 rounded bg-red-500 text-center ">
+                          <div className="p-3 mb-4 rounded bg-red-500 text-center ">
                             {error.text}
                           </div>
                         )}
 
-                        <div class="mb-8">
+                        <div className="mb-8">
 
-                          <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                          <label className="block text-gray-700 text-sm font-bold mb-2" for="email">
                             Email
                           </label>
 
-                          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email" />
+                          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email" />
                         
                         </div>
 
-                        <div class="mb-6 relative">
+                        <div className="mb-6 relative">
 
-                          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                          <label className="block text-gray-700 text-sm font-bold mb-2" for="password">
                             Mot de passe
                           </label>
 
-                          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type={type} value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" placeholder="******************" />
+                          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type={type} value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" placeholder="******************" />
 
                           <span className="absolute right-5 top-12 transform -translate-y-1/2 cursor-pointer"  aria-label={type === 'password' ? 'Afficher le mot de passe' : 'Masquer le mot de passe'} onClick={handleToggle}>
                             {type === 'password' ? <FaEyeSlash size={25} /> : <FaEye size={25} />}
@@ -158,17 +158,17 @@ function Connexion () {
                                              
                         </div>
 
-                        <div class="flex items-center justify-between">
+                        <div className="flex items-center justify-between">
 
-                          <button class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                          <button className="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Se connecter
                           </button>
 
                         </div>
 
-                        <div class="mt-4 mb-4"> 
+                        <div className="mt-4 mb-4"> 
 
-                            <a class="inline-block align-baseline font-bold text-sm text-slate-700 hover:text-slate-900" href={`/Inscription?profil=${profil}`} >
+                            <a className="inline-block align-baseline font-bold text-sm text-slate-700 hover:text-slate-900" href={`/Inscription?profil=${profil}`} >
                                 Vous n'avez pas encore de compte EmgMed1000 ? Insctiption
                             </a>
 

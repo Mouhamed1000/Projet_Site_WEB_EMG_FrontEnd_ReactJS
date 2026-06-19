@@ -64,16 +64,16 @@ function Marques() {
         <>
             <Dashboard />
             
-            <section class="ml-64 flex flex-col justify-center items-center h-screen p-4 shadow-2xl tracking-wide">
+            <section className="ml-64 flex flex-col justify-center items-center h-screen p-4 shadow-2xl tracking-wide">
                 
                 
-                <h1 class="text-center text-2xl mb-4">Liste Marques</h1>
+                <h1 className="text-center text-2xl mb-4">Liste Marques</h1>
 
-                <button class="bg-cyan-600 p-2 rounded-md text-xl hover:bg-sky-600 mb-6 absolute right-10 top-10 mb-10" onClick={AddMarque}>Ajouter</button>
+                <button className="bg-cyan-600 p-2 rounded-md text-xl hover:bg-sky-600 mb-6 absolute right-10 top-10 mb-10" onClick={AddMarque}>Ajouter</button>
 
                 <div className="flex-1 overflow-auto">
 
-                    <table class="mt-12 text-xl table-fixed shadow-md border-solid border-blue-500 w-full text-center border-collapse">  
+                    <table className="mt-12 text-xl table-fixed shadow-md border-solid border-blue-500 w-full text-center border-collapse">  
 
                     <thead> 
                         <tr className="bg-gray-100">
@@ -98,14 +98,14 @@ function Marques() {
                                     </td>
                                     <td>
                                         <div className="flex justify-center gap-4">
-                                            <button class="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditMarque(marque.id)}>
+                                            <button className="bg-green-500 p-2 rounded-md text-xl hover:bg-green-600" onClick={() => EditMarque(marque.id)}>
                                                 <FaEdit size={22}/>
                                             </button>
                                         </div>
                                     </td>
                                     <td>
                                         <div className="flex justify-center gap-4">
-                                            <button class="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteMarque(marque.id)}>
+                                            <button className="bg-red-600 p-2 rounded-md text-xl hover:bg-red-700" onClick={() => DeleteMarque(marque.id)}>
                                                 <FaTrash size={22}/>
                                             </button>
                                         </div>

@@ -61,7 +61,7 @@ function VoitureDetails () {
                             <p className="text-gray-700 font-bold">Marque : {voiture.marque?.nomMarque}</p>
                             <p className="text-gray-700">Modele : {voiture.modele?.nomModele}</p>
                             <p className="text-gray-700">Année : {voiture.anneeVoiture}</p>
-                            <p className="text-gray-700">Statut : {voiture.statut}</p>
+                            <p className="text-gray-700">Statut : {voiture.statut ? "Disponible" : "Vendue"}</p>
                             <p className="text-gray-700 mt-2">{voiture.description}</p>
                         
                         </div>

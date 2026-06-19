@@ -120,7 +120,7 @@ function EditMarque({ marqueId }) {
             
                     <section className="flex-1 min-h-screen w-full flex justify-center items-center">
 
-                    <form onSubmit={handleSubmit} class="ml-64 w-1/2 max-w-xl bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-14 shadow-md">
+                    <form onSubmit={handleSubmit} className="ml-64 w-1/2 max-w-xl bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-14 shadow-md">
 
                         <h2 className="text-center text-2xl font-semibold text-gray-800 mb-8 ">Modification de Marque</h2>
 

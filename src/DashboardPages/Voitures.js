@@ -98,7 +98,7 @@ function Voitures() {
                           <tr key={voiture.id} className="border-b border-gray-300">
 
                             <td>{voiture.voitureId}</td>
-                            <td>{voiture.statut}</td>
+                            <td>{voiture.statut ? "Disponible" : "Vendue"}</td>
 
                             <td>
                               <div className="flex justify-center gap-4">
